@@ -24,6 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useState } from "react";
+console.log("RAKSHA-AI APP LOADED");
 
 /* -------------------------------------------------------
    DEMO INCIDENT DATA
