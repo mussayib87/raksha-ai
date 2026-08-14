@@ -25,6 +25,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+/* -------------------------------------------------------
+   DEMO INCIDENT DATA
+------------------------------------------------------- */
+
 const incidents = [
   { type: "fire", x: 67, y: 47, label: "Critical" },
   { type: "flood", x: 28, y: 67, label: "High" },
@@ -72,11 +76,16 @@ const workflow = [
   },
 ];
 
+/* -------------------------------------------------------
+   LOGO
+------------------------------------------------------- */
+
 function Logo() {
   return (
     <div className="logo">
       <div className="logo-shield">
         <Shield size={28} strokeWidth={1.8} />
+
         <span className="logo-node logo-node-1" />
         <span className="logo-node logo-node-2" />
         <span className="logo-node logo-node-3" />
@@ -95,52 +104,108 @@ function Logo() {
   );
 }
 
+/* -------------------------------------------------------
+   MAIN APP
+------------------------------------------------------- */
+
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
 
   return (
     <div className="app">
       <div className="background-grid" />
 
+      {/* =================================================
+          NAVIGATION
+      ================================================= */}
+
       <header className="navbar">
         <Logo />
 
-        <nav className={`nav-links ${mobileOpen ? "mobile-open" : ""}`}>
-          <a className="active" href="#home" onClick={() => setMobileOpen(false)}>
+        <nav
+          className={`nav-links ${
+            mobileOpen ? "mobile-open" : ""
+          }`}
+        >
+          <a
+            className="active"
+            href="#home"
+            onClick={closeMobileMenu}
+          >
             Home
           </a>
-          <a href="#platform" onClick={() => setMobileOpen(false)}>
+
+          <a
+            href="#platform"
+            onClick={closeMobileMenu}
+          >
             Platform
           </a>
-          <a href="#solutions" onClick={() => setMobileOpen(false)}>
+
+          <a
+            href="#solutions"
+            onClick={closeMobileMenu}
+          >
             Solutions
           </a>
-          <a href="#technology" onClick={() => setMobileOpen(false)}>
+
+          <a
+            href="#technology"
+            onClick={closeMobileMenu}
+          >
             Technology
           </a>
-          <a href="#resources" onClick={() => setMobileOpen(false)}>
+
+          <a
+            href="#resources"
+            onClick={closeMobileMenu}
+          >
             Resources
           </a>
-          <a href="#about" onClick={() => setMobileOpen(false)}>
+
+          <a
+            href="#about"
+            onClick={closeMobileMenu}
+          >
             About Us
           </a>
         </nav>
 
-        <button className="command-button desktop-command">
+        <button
+          className="command-button desktop-command"
+          type="button"
+          onClick={() => {
+            document
+              .getElementById("platform")
+              ?.scrollIntoView({
+                behavior: "smooth",
+              });
+          }}
+        >
           LAUNCH COMMAND CENTER
           <ArrowRight size={17} />
         </button>
 
         <button
           className="mobile-menu"
+          type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle navigation"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </header>
 
       <main>
+        {/* =================================================
+            HERO
+        ================================================= */}
+
         <section className="hero" id="home">
           <div className="hero-copy">
             <div className="eyebrow">
@@ -152,25 +217,47 @@ function App() {
               When every second
               <br />
               matters,{" "}
-              <span className="red-text">intelligence</span>
+              <span className="red-text">
+                intelligence
+              </span>
               <br />
               should move first.
             </h1>
 
             <p className="hero-description">
-              RAKSHA-AI transforms fragmented emergency reports into
-              prioritized action, real-time intelligence, and coordinated
-              response.
+              RAKSHA-AI transforms fragmented emergency
+              reports into prioritized action, real-time
+              intelligence, and coordinated response.
             </p>
 
             <div className="hero-actions">
-              <button className="primary-button">
+              <button
+                className="primary-button"
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById("platform")
+                    ?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                }}
+              >
                 <Shield size={18} />
                 ENTER COMMAND CENTER
                 <ArrowRight size={17} />
               </button>
 
-              <button className="secondary-button">
+              <button
+                className="secondary-button"
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById("platform")
+                    ?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                }}
+              >
                 <Play size={17} />
                 WATCH OVERVIEW
               </button>
@@ -213,6 +300,10 @@ function App() {
           <CommandCenter />
         </section>
 
+        {/* =================================================
+            METRICS
+        ================================================= */}
+
         <section className="metrics">
           <Metric
             icon={<Users />}
@@ -244,9 +335,18 @@ function App() {
           />
         </section>
 
-        <section className="workflow-section" id="platform">
+        {/* =================================================
+            RESPONSE WORKFLOW
+        ================================================= */}
+
+        <section
+          className="workflow-section"
+          id="platform"
+        >
           <div className="section-heading">
-            <div className="section-kicker">RAKSHA-AI RESPONSE ENGINE</div>
+            <div className="section-kicker">
+              RAKSHA-AI RESPONSE ENGINE
+            </div>
 
             <h2>
               From signal to{" "}
@@ -254,9 +354,9 @@ function App() {
             </h2>
 
             <p>
-              Every incident passes through an intelligent response pipeline
-              designed to help emergency teams make faster, better-informed
-              decisions.
+              Every incident passes through an intelligent
+              response pipeline designed to help emergency
+              teams make faster, better-informed decisions.
             </p>
           </div>
 
@@ -265,13 +365,16 @@ function App() {
               const Icon = item.icon;
 
               return (
-                <div className="workflow-item" key={item.title}>
+                <div
+                  className="workflow-item"
+                  key={item.title}
+                >
                   <div className="workflow-icon">
                     <Icon size={22} />
                   </div>
 
                   <div className="workflow-number">
-                    0{index + 1}
+                    {String(index + 1).padStart(2, "0")}
                   </div>
 
                   <h3>{item.title}</h3>
@@ -279,7 +382,10 @@ function App() {
                   <p>{item.description}</p>
 
                   {index !== workflow.length - 1 && (
-                    <ArrowRight className="workflow-arrow" size={20} />
+                    <ArrowRight
+                      className="workflow-arrow"
+                      size={20}
+                    />
                   )}
                 </div>
               );
@@ -287,9 +393,18 @@ function App() {
           </div>
         </section>
 
-        <section className="solution-section" id="solutions">
+        {/* =================================================
+            SOLUTIONS
+        ================================================= */}
+
+        <section
+          className="solution-section"
+          id="solutions"
+        >
           <div>
-            <div className="section-kicker">ONE INTELLIGENCE LAYER</div>
+            <div className="section-kicker">
+              ONE INTELLIGENCE LAYER
+            </div>
 
             <h2>
               Built for cities that
@@ -298,34 +413,53 @@ function App() {
             </h2>
 
             <p>
-              From floods and fires to structural hazards and urban
-              emergencies, RAKSHA-AI gives authorities a unified operational
-              picture of what is happening, where it is happening, and what
-              needs to happen next.
+              From floods and fires to structural hazards
+              and urban emergencies, RAKSHA-AI gives
+              authorities a unified operational picture of
+              what is happening, where it is happening, and
+              what needs to happen next.
             </p>
 
             <div className="solution-list">
               <div>
                 <Shield />
+
                 <span>
-                  <strong>AI-powered prioritization</strong>
-                  <small>Identify critical incidents first.</small>
+                  <strong>
+                    AI-powered prioritization
+                  </strong>
+
+                  <small>
+                    Identify critical incidents first.
+                  </small>
                 </span>
               </div>
 
               <div>
                 <Map />
+
                 <span>
-                  <strong>GIS command visibility</strong>
-                  <small>Understand incidents spatially.</small>
+                  <strong>
+                    GIS command visibility
+                  </strong>
+
+                  <small>
+                    Understand incidents spatially.
+                  </small>
                 </span>
               </div>
 
               <div>
                 <Radio />
+
                 <span>
-                  <strong>Coordinated response</strong>
-                  <small>Connect incidents to resources.</small>
+                  <strong>
+                    Coordinated response
+                  </strong>
+
+                  <small>
+                    Connect incidents to resources.
+                  </small>
                 </span>
               </div>
             </div>
@@ -334,6 +468,7 @@ function App() {
           <div className="risk-card">
             <div className="risk-card-header">
               <span>LIVE RISK INTELLIGENCE</span>
+
               <span className="live-label">
                 <span />
                 LIVE
@@ -343,31 +478,229 @@ function App() {
             <div className="risk-score">
               <div>
                 <small>CITY RISK INDEX</small>
+
                 <strong>72</strong>
+
                 <span>/100</span>
               </div>
 
               <div className="risk-ring">
                 <div>
                   <AlertTriangle size={24} />
+
                   <span>HIGH</span>
                 </div>
               </div>
             </div>
 
             <div className="risk-bars">
-              <RiskBar label="Fire Risk" value={82} />
-              <RiskBar label="Flood Risk" value={64} />
-              <RiskBar label="Traffic Risk" value={48} />
-              <RiskBar label="Structural Risk" value={37} />
+              <RiskBar
+                label="Fire Risk"
+                value={82}
+              />
+
+              <RiskBar
+                label="Flood Risk"
+                value={64}
+              />
+
+              <RiskBar
+                label="Traffic Risk"
+                value={48}
+              />
+
+              <RiskBar
+                label="Structural Risk"
+                value={37}
+              />
             </div>
           </div>
         </section>
 
-        <section className="cta-section" id="about">
+        {/* =================================================
+            TECHNOLOGY
+        ================================================= */}
+
+        <section
+          className="technology-section"
+          id="technology"
+        >
+          <div className="section-heading">
+            <div className="section-kicker">
+              INTELLIGENCE STACK
+            </div>
+
+            <h2>
+              One platform.
+              <br />
+              <span>Multiple layers of intelligence.</span>
+            </h2>
+
+            <p>
+              RAKSHA-AI combines artificial intelligence,
+              geospatial intelligence, real-time alerts and
+              operational coordination into a unified
+              emergency response architecture.
+            </p>
+          </div>
+
+          <div className="technology-grid">
+            <TechnologyCard
+              icon={<Zap />}
+              number="01"
+              title="AI Intelligence"
+              description="Classify, prioritize and analyze incoming emergency information."
+            />
+
+            <TechnologyCard
+              icon={<Map />}
+              number="02"
+              title="GIS Intelligence"
+              description="Visualize incidents, risk zones and response assets geographically."
+            />
+
+            <TechnologyCard
+              icon={<Radio />}
+              number="03"
+              title="Real-Time Alerts"
+              description="Deliver actionable notifications to the right department at the right time."
+            />
+
+            <TechnologyCard
+              icon={<Truck />}
+              number="04"
+              title="Resource Coordination"
+              description="Coordinate emergency teams, vehicles and municipal resources."
+            />
+          </div>
+        </section>
+
+        {/* =================================================
+            RESOURCE SECTION
+        ================================================= */}
+
+        <section
+          className="resources-section"
+          id="resources"
+        >
+          <div className="resource-copy">
+            <div className="section-kicker">
+              OPERATIONAL READINESS
+            </div>
+
+            <h2>
+              Designed around
+              <br />
+              <span>real-world response.</span>
+            </h2>
+
+            <p>
+              Emergency response is not just about
+              identifying a problem. It is about getting the
+              right people and resources to the right place
+              at the right time.
+            </p>
+
+            <div className="resource-points">
+              <div>
+                <span className="resource-check">
+                  <Shield size={16} />
+                </span>
+
+                <div>
+                  <strong>Emergency Teams</strong>
+                  <p>
+                    Track and coordinate response personnel.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <span className="resource-check">
+                  <Truck size={16} />
+                </span>
+
+                <div>
+                  <strong>Response Vehicles</strong>
+                  <p>
+                    Monitor emergency transport and field
+                    resources.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <span className="resource-check">
+                  <HeartPulse size={16} />
+                </span>
+
+                <div>
+                  <strong>Medical Response</strong>
+                  <p>
+                    Connect incidents with medical support.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="resource-dashboard">
+            <div className="resource-dashboard-header">
+              <span>RESPONSE RESOURCES</span>
+
+              <span className="available">
+                <i />
+                84% AVAILABLE
+              </span>
+            </div>
+
+            <ResourceDashboardRow
+              icon={<HeartPulse />}
+              title="Ambulance Units"
+              count="24"
+              available="19"
+              percentage={79}
+            />
+
+            <ResourceDashboardRow
+              icon={<Flame />}
+              title="Fire Response Units"
+              count="18"
+              available="14"
+              percentage={78}
+            />
+
+            <ResourceDashboardRow
+              icon={<Shield />}
+              title="Police Units"
+              count="42"
+              available="38"
+              percentage={90}
+            />
+
+            <ResourceDashboardRow
+              icon={<Users />}
+              title="Rescue Teams"
+              count="12"
+              available="10"
+              percentage={83}
+            />
+          </div>
+        </section>
+
+        {/* =================================================
+            CTA
+        ================================================= */}
+
+        <section
+          className="cta-section"
+          id="about"
+        >
           <div className="cta-glow" />
 
-          <div className="section-kicker">SMART CITIES & DISASTER MANAGEMENT</div>
+          <div className="section-kicker">
+            SMART CITIES & DISASTER MANAGEMENT
+          </div>
 
           <h2>
             Turn emergency data
@@ -376,16 +709,31 @@ function App() {
           </h2>
 
           <p>
-            RAKSHA-AI brings AI, GIS, alerts, and emergency coordination
-            together in one intelligent platform.
+            RAKSHA-AI brings AI, GIS, alerts, and emergency
+            coordination together in one intelligent
+            platform.
           </p>
 
-          <button className="primary-button large">
+          <button
+            className="primary-button large"
+            type="button"
+            onClick={() => {
+              document
+                .getElementById("platform")
+                ?.scrollIntoView({
+                  behavior: "smooth",
+                });
+            }}
+          >
             EXPLORE RAKSHA-AI
             <ArrowRight size={18} />
           </button>
         </section>
       </main>
+
+      {/* =================================================
+          FOOTER
+      ================================================= */}
 
       <footer>
         <Logo />
@@ -399,27 +747,30 @@ function App() {
   );
 }
 
+/* =======================================================
+   METRIC COMPONENT
+======================================================= */
+
 function Metric({
   icon,
   value,
   suffix,
   label,
   type,
-}: {
-  icon: React.ReactNode;
-  value: string;
-  suffix?: string;
-  label: string;
-  type: string;
 }) {
   return (
     <div className={`metric ${type}`}>
-      <div className="metric-icon">{icon}</div>
+      <div className="metric-icon">
+        {icon}
+      </div>
 
       <div>
         <strong>
           {value}
-          {suffix && <small>{suffix}</small>}
+
+          {suffix && (
+            <small>{suffix}</small>
+          )}
         </strong>
 
         <span>{label}</span>
@@ -427,6 +778,10 @@ function Metric({
     </div>
   );
 }
+
+/* =======================================================
+   COMMAND CENTER
+======================================================= */
 
 function CommandCenter() {
   return (
@@ -451,20 +806,59 @@ function CommandCenter() {
           <ChevronDown size={13} />
         </div>
 
-        <Search size={17} className="top-icon" />
-        <Bell size={17} className="top-icon" />
+        <Search
+          size={17}
+          className="top-icon"
+        />
+
+        <Bell
+          size={17}
+          className="top-icon"
+        />
       </div>
 
       <div className="command-body">
+        {/* SIDEBAR */}
+
         <aside className="command-sidebar">
-          <SideItem icon={<Activity />} text="Dashboard" active />
-          <SideItem icon={<Siren />} text="Incidents" />
-          <SideItem icon={<Map />} text="Map View" />
-          <SideItem icon={<Truck />} text="Resources" />
-          <SideItem icon={<Bell />} text="Alerts" />
-          <SideItem icon={<Activity />} text="Analytics" />
-          <SideItem icon={<Shield />} text="Reports" />
+          <SideItem
+            icon={<Activity />}
+            text="Dashboard"
+            active
+          />
+
+          <SideItem
+            icon={<Siren />}
+            text="Incidents"
+          />
+
+          <SideItem
+            icon={<Map />}
+            text="Map View"
+          />
+
+          <SideItem
+            icon={<Truck />}
+            text="Resources"
+          />
+
+          <SideItem
+            icon={<Bell />}
+            text="Alerts"
+          />
+
+          <SideItem
+            icon={<Activity />}
+            text="Analytics"
+          />
+
+          <SideItem
+            icon={<Shield />}
+            text="Reports"
+          />
         </aside>
+
+        {/* MAIN COMMAND AREA */}
 
         <div className="command-main">
           <div className="stat-row">
@@ -509,44 +903,92 @@ function CommandCenter() {
 
               <div className="map-grid-lines" />
 
-              {incidents.map((incident, index) => (
-                <IncidentMarker
-                  key={index}
-                  {...incident}
-                />
-              ))}
+              {incidents.map(
+                (incident, index) => (
+                  <IncidentMarker
+                    key={index}
+                    {...incident}
+                  />
+                )
+              )}
             </div>
+
+            {/* MAP LEGEND */}
 
             <div className="map-legend">
               <span>INCIDENTS</span>
-              <Legend color="critical" label="Critical" />
-              <Legend color="high" label="High" />
-              <Legend color="medium" label="Medium" />
-              <Legend color="low" label="Low" />
+
+              <Legend
+                color="critical"
+                label="Critical"
+              />
+
+              <Legend
+                color="high"
+                label="High"
+              />
+
+              <Legend
+                color="medium"
+                label="Medium"
+              />
+
+              <Legend
+                color="low"
+                label="Low"
+              />
             </div>
+
+            {/* RESOURCES */}
 
             <div className="resources">
               <span>RESOURCES</span>
 
-              <Resource icon={<HeartPulse />} text="Ambulance" />
-              <Resource icon={<Flame />} text="Fire Brigade" />
-              <Resource icon={<Shield />} text="Police" />
-              <Resource icon={<Users />} text="Rescue Team" />
+              <Resource
+                icon={<HeartPulse />}
+                text="Ambulance"
+              />
+
+              <Resource
+                icon={<Flame />}
+                text="Fire Brigade"
+              />
+
+              <Resource
+                icon={<Shield />}
+                text="Police"
+              />
+
+              <Resource
+                icon={<Users />}
+                text="Rescue Team"
+              />
             </div>
 
+            {/* MAP CONTROLS */}
+
             <div className="map-controls">
-              <button>+</button>
-              <button>−</button>
-              <button>
+              <button type="button">
+                +
+              </button>
+
+              <button type="button">
+                −
+              </button>
+
+              <button type="button">
                 <Search size={14} />
               </button>
             </div>
           </div>
         </div>
 
+        {/* AI ANALYSIS */}
+
         <aside className="command-right">
           <div className="analysis-header">
             <span>AI ANALYSIS</span>
+
             <b>CRITICAL</b>
           </div>
 
@@ -554,7 +996,9 @@ function CommandCenter() {
             <Flame size={20} />
           </div>
 
-          <h3>Building Fire Detected</h3>
+          <h3>
+            Building Fire Detected
+          </h3>
 
           <p className="analysis-location">
             Shivajinagar, Pune
@@ -577,14 +1021,22 @@ function CommandCenter() {
             <strong>HIGH</strong>
           </div>
 
-          <button className="details-button">
+          <button
+            className="details-button"
+            type="button"
+          >
             VIEW DETAILS
           </button>
 
           <div className="recent-alerts">
             <div className="recent-header">
-              <span>RECENT ALERTS</span>
-              <small>View All</small>
+              <span>
+                RECENT ALERTS
+              </span>
+
+              <small>
+                View All
+              </small>
             </div>
 
             <AlertRow
@@ -621,40 +1073,58 @@ function CommandCenter() {
   );
 }
 
+
+/* =======================================================
+   SIDEBAR ITEM
+======================================================= */
+
 function SideItem({
   icon,
   text,
   active,
-}: {
-  icon: React.ReactNode;
-  text: string;
-  active?: boolean;
 }) {
   return (
-    <div className={`side-item ${active ? "active" : ""}`}>
+    <div
+      className={`side-item ${
+        active ? "active" : ""
+      }`}
+    >
       {icon}
-      <span>{text}</span>
+
+      <span>
+        {text}
+      </span>
     </div>
   );
 }
+
+
+/* =======================================================
+   COMMAND STAT
+======================================================= */
 
 function CommandStat({
   value,
   label,
   icon,
   type,
-}: {
-  value: string;
-  label: string;
-  icon: React.ReactNode;
-  type: string;
 }) {
   return (
-    <div className={`command-stat ${type}`}>
+    <div
+      className={`command-stat ${type}`}
+    >
       <div>
-        <strong>{value}</strong>
-        <span>{label}</span>
-        <small>+5.2% from yesterday</small>
+        <strong>
+          {value}
+        </strong>
+
+        <span>
+          {label}
+        </span>
+
+        <small>
+          +5.2% from yesterday
+        </small>
       </div>
 
       {icon}
@@ -662,109 +1132,231 @@ function CommandStat({
   );
 }
 
+
+/* =======================================================
+   INCIDENT MARKER
+======================================================= */
+
 function IncidentMarker({
   x,
   y,
   type,
-}: {
-  x: number;
-  y: number;
-  type: string;
 }) {
-  const Icon =
-    type === "fire"
-      ? Flame
-      : type === "flood"
-      ? Waves
-      : type === "warning"
-      ? AlertTriangle
-      : Shield;
+  let Icon;
+
+  if (type === "fire") {
+    Icon = Flame;
+  } else if (type === "flood") {
+    Icon = Waves;
+  } else if (type === "warning") {
+    Icon = AlertTriangle;
+  } else {
+    Icon = Shield;
+  }
 
   return (
     <div
       className={`incident-marker ${type}`}
-      style={{ left: `${x}%`, top: `${y}%` }}
+      style={{
+        left: `${x}%`,
+        top: `${y}%`,
+      }}
     >
       <div className="marker-pulse" />
+
       <Icon size={18} />
     </div>
   );
 }
 
+
+/* =======================================================
+   LEGEND
+======================================================= */
+
 function Legend({
   color,
   label,
-}: {
-  color: string;
-  label: string;
 }) {
   return (
     <div className="legend-item">
       <i className={color} />
+
       {label}
     </div>
   );
 }
 
+
+/* =======================================================
+   RESOURCE
+======================================================= */
+
 function Resource({
   icon,
   text,
-}: {
-  icon: React.ReactNode;
-  text: string;
 }) {
   return (
     <div className="resource-item">
       {icon}
-      <span>{text}</span>
+
+      <span>
+        {text}
+      </span>
     </div>
   );
 }
+
+
+/* =======================================================
+   ALERT ROW
+======================================================= */
 
 function AlertRow({
   icon,
   title,
   location,
   time,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  location: string;
-  time: string;
 }) {
   return (
     <div className="alert-row">
-      <div className="alert-icon">{icon}</div>
-
-      <div>
-        <strong>{title}</strong>
-        <span>{location}</span>
+      <div className="alert-icon">
+        {icon}
       </div>
 
-      <small>{time}</small>
+      <div>
+        <strong>
+          {title}
+        </strong>
+
+        <span>
+          {location}
+        </span>
+      </div>
+
+      <small>
+        {time}
+      </small>
     </div>
   );
 }
+
+
+/* =======================================================
+   RISK BAR
+======================================================= */
 
 function RiskBar({
   label,
   value,
-}: {
-  label: string;
-  value: number;
 }) {
   return (
     <div className="risk-bar">
       <div>
-        <span>{label}</span>
-        <strong>{value}%</strong>
+        <span>
+          {label}
+        </span>
+
+        <strong>
+          {value}%
+        </strong>
       </div>
 
       <div className="bar">
-        <i style={{ width: `${value}%` }} />
+        <i
+          style={{
+            width: `${value}%`,
+          }}
+        />
       </div>
     </div>
   );
 }
+
+
+/* =======================================================
+   TECHNOLOGY CARD
+======================================================= */
+
+function TechnologyCard({
+  icon,
+  number,
+  title,
+  description,
+}) {
+  return (
+    <div className="technology-card">
+      <div className="technology-card-top">
+        <div className="technology-icon">
+          {icon}
+        </div>
+
+        <span>
+          {number}
+        </span>
+      </div>
+
+      <h3>
+        {title}
+      </h3>
+
+      <p>
+        {description}
+      </p>
+
+      <div className="technology-line" />
+    </div>
+  );
+}
+
+
+/* =======================================================
+   RESOURCE DASHBOARD ROW
+======================================================= */
+
+function ResourceDashboardRow({
+  icon,
+  title,
+  count,
+  available,
+  percentage,
+}) {
+  return (
+    <div className="resource-dashboard-row">
+      <div className="resource-dashboard-icon">
+        {icon}
+      </div>
+
+      <div className="resource-dashboard-info">
+        <div className="resource-dashboard-title">
+          <strong>
+            {title}
+          </strong>
+
+          <span>
+            {available}/{count}
+          </span>
+        </div>
+
+        <div className="resource-progress">
+          <i
+            style={{
+              width: `${percentage}%`,
+            }}
+          />
+        </div>
+
+        <small>
+          {percentage}% operational
+        </small>
+      </div>
+    </div>
+  );
+}
+
+
+/* =======================================================
+   EXPORT
+======================================================= */
 
 export default App;
